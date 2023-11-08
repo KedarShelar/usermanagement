@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Confirm Delete</h2>
+<div mat-dialog-content>
+    <form #editForm="ngForm">
+
+        <mat-card>
+            <mat-card-content>
+                <h3>Are you sure to delete <b><i> {{ data.name }} </i> </b></h3>
+            </mat-card-content>
+        </mat-card>
+
+    </form>
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-button color="warn" (click)="onDelete(data)" cdkFocusInitial>Confirm delete</button>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+
+</div>

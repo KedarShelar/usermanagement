@@ -1,0 +1,100 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="text-center">
+                    <h2><b>User Profile</b></h2>
+                </div>
+                <form [formGroup]="userprofilepage" (ngSubmit)="updateUser(user)">
+                    <div>
+                        <img [src]="user.image" alt="Uploaded Image" style="height: 200px; width: 200px">
+
+                    </div>
+                    <div class="mb-3">
+                        <input type="file" (change)="onFileChange($event)" accept="image/*" class="form-control"
+                            formControlName="image">
+                    </div>
+                    &nbsp;
+
+
+                    <div class="mb-3">
+                        <label class="form-label">Email address</label>
+                        <input formControlName="email" id="email" type="email" class="form-control" [value]="user.email"
+                            [(ngModel)]="user.email" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input formControlName="name" type="text" id="name" class="form-control" [value]="user.name"
+                            [(ngModel)]="user.name">
+
+
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input formControlName="mobile" type="number" id="mobile" class="form-control"
+                            [value]="user.mobile" [(ngModel)]="user.mobile">
+
+
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">new Password</label>
+                        <input formControlName="password" type="password" id="password" class="form-control">
+
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        <input formControlName="confirmpassword" type="password" id="confirmpassword"
+                            class="form-control" id="confirmpassword">
+                        <div *ngIf="userprofilepage.get('confirmpassword')?.hasError('passwordMismatch')">
+                            Passwords do not match.
+                        </div>
+
+                    </div>
+                    <div class="mb-3">
+                        <fieldset>
+                            <h3>Please select Gender</h3>
+                            <label>
+                                <input type="radio" id="male" formControlName="gender" value="male"
+                                    [(ngModel)]="user.gender"> Male
+                            </label>
+
+                            <label>
+                                <input type="radio" id="female" formControlName="gender" value="female"
+                                    [(ngModel)]="user.gender"> Female
+                            </label>
+                        </fieldset>
+                    </div>
+
+                    <div>
+                        <mat-form-field>
+                            <mat-label>States</mat-label>
+                            <mat-select formControlName="state" id="state">
+                                <mat-option value=''>Select State</mat-option>
+                                <mat-option *ngFor="let state of statelist" [(ngModel)]="user.state"
+                                    [value]="state.name">
+                                    {{state.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+
+                    <div>
+                        <h2>Select your Language:</h2>
+                        <mat-checkbox-group [(ngModel)]="languages" formControlName="languages" id="languages">
+                            <mat-checkbox *ngFor="let language of languages" [value]="language.value"
+                                [(ngModel)]="user.languages" (change)="toggleLanguageSelection(language)">
+                                {{ language.name}}</mat-checkbox>
+                        </mat-checkbox-group>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">updateprofile</button>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

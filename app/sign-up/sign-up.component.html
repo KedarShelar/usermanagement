@@ -1,0 +1,116 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="text-center">
+                    <h1>Sign Up Portal</h1>
+                    <h3>You can Sign Up here!</h3>
+                </div>
+                <form [formGroup]="signupForm" (ngSubmit)="signUp()">
+
+                    <div class="mb-3">
+                        <input type="file" (change)="onFileChange($event)" accept="image/*" class="form-control"
+                            formControlName="image">
+                    </div>
+
+                    &nbsp;
+                    <div class="mb-3">
+                        <label class="form-label">Email address</label>
+                        <input formControlName="email" type="email" class="form-control" placeholder="Email address">
+                        <span
+                            *ngIf="signupForm.get('email')?.hasError('required') && signupForm.get('email')?.touched && signupForm.get('email')?.invalid"
+                            style="color: red">Email
+                            is required</span>
+
+
+                        <span
+                            *ngIf="signupForm.get('email')?.hasError('emailerror') && signupForm.get('email')?.touched && signupForm.get('email')?.invalid"
+                            style="color: red" class="error-message">Please enter valid email id</span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input formControlName="name" type="text" class="form-control" placeholder="Name">
+                        <span
+                            *ngIf="signupForm.get('name')?.hasError('required') && signupForm.get('name')?.touched && signupForm.get('name')?.invalid"
+                            style="color: red">name
+                            is required</span>
+
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input formControlName="mobile" type="number" class="form-control" placeholder="Phone">
+                        <span
+                            *ngIf="signupForm.get('mobile')?.hasError('required') && signupForm.get('mobile')?.touched && signupForm.get('mobile')?.invalid"
+                            style="color: red">Phone Number
+                            is required</span>
+                        <span
+                            *ngIf="signupForm.get('mobile')?.hasError('mobileerror') && signupForm.get('mobile')?.touched && signupForm.get('mobile')?.invalid"
+                            style="color: red" class="error-message">Write valid phone number</span>
+
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input formControlName="password" type="password" class="form-control" id="password">
+                        <span
+                            *ngIf="signupForm.get('password')?.hasError('required') && signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
+                            style="color: red">Password
+                            is required</span>
+                        <span *ngIf="errors.password" class="text-danger">{{errors.password}}</span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        <input formControlName="confirmpassword" type="password" class="form-control"
+                            id="confirmpassword">
+                        <div *ngIf="signupForm.get('confirmpassword')?.hasError('passwordMismatch')">
+                            Passwords do not match.
+                        </div>
+                        <span
+                            *ngIf="signupForm.get('confirmpassword')?.hasError('required') && signupForm.get('confirmpassword')?.touched && signupForm.get('confirmpassword')?.invalid"
+                            style="color: red">Please Confirm the Password</span>
+
+
+                    </div>
+                    <div class="mb-3">
+                        <fieldset>
+                            <h3>Please select Gender</h3>
+                            <label>
+                                <input type="radio" formControlName="gender" value="male"> Male
+                            </label>
+
+                            <label>
+                                <input type="radio" formControlName="gender" value="female"> Female
+                            </label>
+                        </fieldset>
+                    </div>
+
+                    <div>
+                        <mat-form-field>
+                            <mat-label>States</mat-label>
+                            <mat-select formControlName="state">
+                                <mat-option value=''>Select State</mat-option>
+                                <mat-option *ngFor="let state of statelist" [value]="state.name">
+                                    {{state.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+
+                    <div>
+                        <h2>Select your Language:</h2>
+                        <mat-checkbox-group [(ngModel)]="languages" formControlName="languages">
+                            <mat-checkbox *ngFor="let language of languages" [value]="language.value"
+                                (change)="toggleLanguageSelection(language)">
+                                {{ language.name}}</mat-checkbox>
+                        </mat-checkbox-group>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">sign up</button>
+                </form>
+                <a style="color: blue; margin-top: 10px;" routerLink="/signin">Already User? Click to Login</a>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<h4>Recycle Bin</h4>
+<mat-card>
+    <div class="row">
+        <div class="col-8">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr class="bg-success text-white">
+                        <th>Sr_no</th>
+                        <th>name</th>
+                        <th>Designation</th>
+                        <th>salary</th>
+                        <th>action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of userdata;let i = index">
+                        <td>
+                            <h3>{{user.id}} </h3>
+                        </td>
+                        <td>
+                            <div *ngIf="user.isEdit">
+                                <input type="text" class="form-control" [(ngModel)]="user.name">
+                            </div>
+                            <div *ngIf="!user.isEdit">
+                                <h3> {{user.name}} </h3>
+                            </div>
+                        </td>
+                        <td>
+                            <div *ngIf="user.isEdit">
+                                <input type="text" class="form-control" [(ngModel)]="user.Designation">
+                            </div>
+                            <div *ngIf="!user.isEdit">
+                                <h3> {{user.Designation}} </h3>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div *ngIf="user.isEdit">
+                                <input type="text" class="form-control" [(ngModel)]="user.Salary">
+                            </div>
+                            <div *ngIf="!user.isEdit">
+                                <h3> {{user.Salary}}</h3>
+                            </div>
+                        </td>
+
+                        <td class="text-right">
+                            <div *ngIf="!user.isEdit">
+                                <button class="btn btn-info"><i class="fa fa-pencil-square-o px-1" aria-hidden="true"
+                                        (click)="onRestore(user, i)">Restore</i></button> &nbsp;
+                                <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"
+                                        (click)="onCancel(user)">Cancel</i></button> &nbsp;
+                                <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"
+                                        (click)="deleteuser(user)">Delete Permanently</i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</mat-card>

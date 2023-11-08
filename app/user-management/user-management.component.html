@@ -1,0 +1,75 @@
+<mat-card>
+    &nbsp;
+    <div class="row">
+        <div class="col-8">
+            <button type="button" class="btn btn-primary" (click)="add()">Add New User</button>
+        </div>
+    </div>
+</mat-card>
+
+
+<mat-card>
+    <mat-card-header>
+        <h2>User Management Dashboard</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="mat-elevation-z8">
+            <table mat-table matSort [dataSource]="dataSource">
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> Email </th>
+                    <td mat-cell *matCellDef="let element; let i = index"> {{element.id}} </td>
+                </ng-container>
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="Designation">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Designation </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Designation}} </td>
+                </ng-container>
+
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="Salary">
+                    <th mat-header-cell *matHeaderCellDef> Salary </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Salary}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Action">
+                    <th mat-header-cell *matHeaderCellDef> Action </th>
+
+
+                    <td mat-cell *matCellDef="let element">
+                        <div>
+                            <button class="btn" [ngClass]="{'btn-info': !element.isEdit, 'btn-success': element.isEdit}"
+                                (click)="element.isEdit ? 'none' : onEdit(element)">
+                                <i class="fa"
+                                    [ngClass]="{'fa-pencil-square-o': !element.isEdit, 'fa-cloud': element.isEdit}"></i>
+                                {{ element.isEdit ? 'Update' : 'Edit' }}
+                            </button>
+                            &nbsp;
+                            <button class="btn btn-danger"
+                                (click)="element.isEdit ? onCancel(element) : onDelete(element)">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                {{ element.isEdit ? 'Cancel' : 'Delete' }}
+                            </button>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

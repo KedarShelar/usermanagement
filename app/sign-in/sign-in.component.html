@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="text-center">
+                    <h1>Login to User Management</h1>
+                    <h3>Login here!</h3>
+                </div>
+                <form [formGroup]="loginForm">
+                    <div class="mb-3">
+                        <label class="form-label">Email address</label>
+                        <input formControlName="id" type="email" class="form-control" placeholder="Email address">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input formControlName="password" type="password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary" (click)="logIn()">Login</button>
+                </form>
+                <a style="color: blue; margin-top: 10px;" routerLink="/signup">New User? Click to Sign up</a>
+
+            </div>
+        </div>
+    </div>
+</div>
